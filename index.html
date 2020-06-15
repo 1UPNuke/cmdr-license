@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMDR License Maker V2</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <meta charset="utf-8">
+
+    <meta name="description" content="Make your own commander license, and download it!">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta property="og:title" content="CMDR License Maker V2">
+    <meta property="og:image" content="https://oneup.life/media/images/ogimage.webp">
+    <meta property="og:image:secure_url" content="https://oneup.life/media/images/ogimage.webp">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Make your own commander license, and download it!">
+
+    <meta name="theme-color" content="#FFFF55">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+</head>
+<body>
+    <a id="link" style="display: none;"></a>
+    <h1><img src="img/pilotfedlogo.png" width="50px" alt=""> Pilot's Federation Commander License Application V2</h1>
+    <div id="content">
+        <div id="licenseformdiv">
+            <p>If you have any issues, please report them on <a href="https://github.com/1UPNuke/cmdr-license-v2/issues"><b>Github</b></a></p>
+            <form name="licenseform">
+                <noscript><p style="color:red; font-size: 200%;">Please enable javascript!</p></noscript><br>
+                <label for="name">CMDR Name: <span class="field-addition"> CMDR </span></label>
+                <input type="text" id="name" placeholder="Picard"><br>
+                <br>
+                <label for="birthplace">Place of birth: </label>
+                <input type="text" id="birthplace" placeholder="Sol"><br>
+                <br>
+                <input type="checkbox" id="birthdaydoi" name="faction" value="independent" onchange="BirthdayToDOI();">
+                <label for="lowestna">Change birthday to date of issue</label><br>
+                <label for="birthday">Birthday: </label>
+                <input type="date" id="birthday"><br>
+                <br>
+                <label for="profession">Profession: </label>
+                <input type="text" id="profession" placeholder="Fuel rat"><br>
+                <br>
+                <label for="ship">Main ship: </label>
+                <input type="text" id="ship" placeholder="Sidewinder"><br>
+                <label for="shipname">Ship name: </label>
+                <input type="text" id="shipname" placeholder="Absolute Beauty" pattern=".{1,21}"><br>
+                <label for="id">Ship ID: </label>
+                <input type="text" id="id" placeholder="ABC123" pattern=".{1,6}"><br>
+                <br>
+                <label for="sex">Sex: </label>
+                <div id="sex">
+                    <input type="radio" id="male" name="sex" value="m">
+                    <label for="male">Male</label><br>
+                    <input type="radio" id="female" name="sex" value="f">
+                    <label for="female">Female</label><br>
+                    <input type="radio" id="none" name="sex" value="[Redacted]" checked>
+                    <label for="none">Prefer not to say</label> 
+                </div>
+                <br>
+                <label for="faction">Faction: </label><br>
+                <div id="faction">
+                    <input type="radio" id="independent" name="faction" value="independent" checked>
+                    <label for="independent">Independent</label><br>
+                    <input type="radio" id="federation" name="faction" value="federation">
+                    <label for="federation">Federation</label><br>
+                    <input type="radio" id="empire" name="faction" value="empire">
+                    <label for="empire">Empire</label><br>
+                    <input type="radio" id="alliance" name="faction" value="alliance">
+                    <label for="alliance">Alliance</label>
+                </div>
+                <br>
+                <label for="rank">Rank: </label><br>
+                <input type="checkbox" id="lowestna" name="faction" value="independent" onchange="LowestToNA();">
+                <label for="lowestna">Change lowest ranks to "N/A"</label><br>
+                <div id="rank">
+                    <label for="combat">Combat: </label>
+                    <select id="combat">
+                        <option value="0">Harmless</option>
+                        <option value="1">Mostly Harmless</option>
+                        <option value="2">Novice</option>
+                        <option value="3">Competent</option>
+                        <option value="4">Expert</option>
+                        <option value="5">Master</option>
+                        <option value="6">Dangerous</option>
+                        <option value="7">Deadly</option>
+                        <option value="8">Elite</option>
+                    </select><br>
+                    <label for="trade">Trade: </label>
+                    <select id="trade">
+                        <option value="0">Penniless</option>
+                        <option value="1">Mostly Penniless</option>
+                        <option value="2">Peddler</option>
+                        <option value="3">Dealer</option>
+                        <option value="4">Merchant</option>
+                        <option value="5">Broker</option>
+                        <option value="6">Entrepreneur</option>
+                        <option value="7">Tycoon</option>
+                        <option value="8">Elite</option>
+                    </select><br>
+                    <label for="explorer">Explorer: </label>
+                    <select id="explorer">
+                        <option value="0">Aimless</option>
+                        <option value="1">Mostly Aimless</option>
+                        <option value="2">Scout</option>
+                        <option value="3">Surveyor</option>
+                        <option value="4">Trailblazer</option>
+                        <option value="5">Pathfinder</option>
+                        <option value="6">Ranger</option>
+                        <option value="7">Pioneer</option>
+                        <option value="8">Elite</option>
+                    </select><br>
+                    <label for="cqc">CQC: </label>
+                    <select id="cqc">
+                        <option value="0">Helpless</option>
+                        <option value="1">Mostly Helpless</option>
+                        <option value="2">Amateur</option>
+                        <option value="3">Semi Professional</option>
+                        <option value="4">Professional</option>
+                        <option value="5">Champion</option>
+                        <option value="6">Hero</option>
+                        <option value="7">Legend</option>
+                        <option value="8">Elite</option>
+                    </select><br>
+                </div>
+                <br>
+                <label for="factionrank">Faction ranks: </label><br>
+                <div id="factionrank">
+                    <label for="fedrank">Federal Navy Rank: </label>
+                    <select id="fedrank">
+                        <option value="None">None</option>
+                        <option value="Recruit">Recruit</option>
+                        <option value="Cadet">Cadet</option>
+                        <option value="Midshipman">Midshipman</option>
+                        <option value="Petty Officer">Petty Officer</option>
+                        <option value="Chief Petty Officer">Chief Petty Officer</option>
+                        <option value="Warrant Officer">Warrant Officer</option>
+                        <option value="Ensign">Ensign</option>
+                        <option value="Lieutenant">Lieutenant</option>
+                        <option value="Lieutenant Commander">Lieutenant Commander</option>
+                        <option value="Post Commander">Post Commander</option>
+                        <option value="Post Captain">Post Captain</option>
+                        <option value="Rear Admiral">Rear Admiral</option>
+                        <option value="Vice Admiral">Vice Admiral</option>
+                        <option value="Admiral">Admiral</option>
+                    </select><br>
+                    <label for="empirerank">Imperial Navy Rank: </label>
+                    <select id="empirerank">
+                        <option value="None">None</option>
+                        <option value="Outsider">Outsider</option>
+                        <option value="Serf">Serf</option>
+                        <option value="Master">Master</option>
+                        <option value="Squire">Squire</option>
+                        <option value="Knight">Knight</option>
+                        <option value="Lord">Lord</option>
+                        <option value="Baron">Baron</option>
+                        <option value="Viscount">Viscount</option>
+                        <option value="Count">Count</option>
+                        <option value="Earl">Earl</option>
+                        <option value="Marquis">Marquis</option>
+                        <option value="Duke">Duke</option>
+                        <option value="Prince">Prince</option>
+                        <option value="King">King</option>
+                    </select><br>
+                </div>
+                <br>
+                <label for="picture">Picture: </label>
+                <input type="file" id="picture"><br>
+                <br>
+		<label for="color">UI color: </label>
+                <input type="color" id="color" value="#ff7100"><br>
+                <br>
+                <input type="button" class="big-btn" value="Get your license" onclick="Generate()">
+                <input type="button" class="big-btn" value="Save as .PNG" onclick="Save()">
+            </form>
+        </div>
+        <div id="canvascontainer">
+            <canvas id="license" width="1920" height="1224">
+                Canvas is not supported in your browser!
+            </canvas>
+        </div>
+    </div>
+</body>
+</html>

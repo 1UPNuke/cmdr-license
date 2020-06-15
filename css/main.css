@@ -1,0 +1,86 @@
+:root{
+    --ed-orange: #ff7100;
+    --ed-dark-orange: #884500;
+}
+
+@font-face {
+    font-family: eurocaps;
+    src: url(../fonts/eurocaps.ttf);
+}
+
+body{
+    background-color: black;
+    background-image: url(../img/siteBG.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+#content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#licenseform{
+    width: 10%;
+    display: block;
+    float: left;
+}
+h1,h2,h3,h4,h5,h6,p,pre,a,label{
+    font-family: eurocaps;
+    color: var(--ed-orange);
+}
+
+input{
+    font-family: eurocaps;
+    background-color : black;
+    color: var(--ed-orange);
+    border: 1px solid var(--ed-orange);
+}
+input:invalid{
+    border: 1px solid red;
+}
+
+button#reset-button{
+    background-color: white;
+}
+
+.field-addition{
+    color: var(--ed-orange);
+    border: 1px solid var(--ed-orange);
+}
+
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 20px;
+    background: url(../img/arrow.png) 96% / 10% no-repeat transparent;
+    font-family: eurocaps;
+    background-color : black;
+    color: var(--ed-orange);
+    border: 1px solid var(--ed-orange);
+}
+
+button{
+    color: var(--ed-orange);
+    border: 1px solid var(--ed-orange);
+    background-color: transparent;
+}
+
+.big-btn{
+    background-color: var(--ed-orange);
+    color: black;
+    font-size: 150%;
+}
+
+#licenseformdiv{
+    flex: 1;
+    min-width: max-content;
+}
+#canvascontainer{
+    flex: 1;
+    min-width: 60vmax;
+}
+canvas{
+    width: 100%;
+}
