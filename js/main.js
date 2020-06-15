@@ -259,7 +259,7 @@ function handleImage(e){
 
 async function Save()
 {   
-    await Generate();
+    //await Generate();
     var link = $('#link')[0];
     link.setAttribute('download', 'CMDRLicense-'+name+'.png');
     link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
