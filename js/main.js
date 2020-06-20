@@ -104,7 +104,7 @@ async function Generate()
 
     //Draw the title
     ctx.font = "50px eurocaps";
-    ctx.fillText("Pilot's Federation", 290, 100);
+    ctx.fillText("Pilots Federation", 290, 100);
     ctx.font = "100px eurocaps";
     ctx.fillText("Commander License", 285, 175);
 
