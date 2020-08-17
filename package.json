@@ -1,0 +1,31 @@
+{
+  "name": "cmdr-license-v2",
+  "version": "2.1.0",
+  "description": "Commander license generator for the game Elite: Dangerous",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1UPNuke/cmdr-license-v2.git"
+  },
+  "build": {
+    "appId": "fi.1up.cmdr-license"
+  },
+  "keywords": [],
+  "author": "1-UP Nuke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1UPNuke/cmdr-license-v2/issues"
+  },
+  "homepage": "https://github.com/1UPNuke/cmdr-license-v2#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^9.2.0",
+    "electron-builder": "^22.8.0"
+  }
+}

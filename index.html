@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMDR License Maker V2</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/generator.js"></script>
 
     <meta charset="utf-8">
 
@@ -27,14 +28,18 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
 </head>
+
 <body>
     <a id="link" style="display: none;"></a>
     <h1><img src="img/pilotfedlogo.png" width="50px" alt=""> Pilots Federation Commander License Application V2</h1>
     <div id="content">
         <div id="licenseformdiv">
-            <p>If you have any issues, please report them on <a href="https://github.com/1UPNuke/cmdr-license-v2/issues"><b>Github</b></a></p>
+            <p>If you have any issues, please report them on <a
+                    href="https://github.com/1UPNuke/cmdr-license-v2/issues"><b>Github</b></a></p>
             <form name="licenseform">
-                <noscript><p style="color:red; font-size: 200%;">Please enable javascript!</p></noscript><br>
+                <noscript>
+                    <p style="color:red; font-size: 200%;">Please enable javascript!</p>
+                </noscript><br>
                 <label for="name">CMDR Name: <span class="field-addition"> CMDR </span></label>
                 <input type="text" id="name" placeholder="Picard"><br>
                 <br>
@@ -63,7 +68,7 @@
                     <input type="radio" id="female" name="sex" value="f">
                     <label for="female">Female</label><br>
                     <input type="radio" id="none" name="sex" value="[Redacted]" checked>
-                    <label for="none">Prefer not to say</label> 
+                    <label for="none">Prefer not to say</label>
                 </div>
                 <br>
                 <label for="faction">Faction: </label><br>
@@ -175,7 +180,7 @@
                 <label for="picture">Picture: </label>
                 <input type="file" id="picture"><br>
                 <br>
-		<label for="color">UI color: </label>
+                <label for="color">UI color: </label>
                 <input type="color" id="color" value="#ff7100"><br>
                 <br>
                 <input type="button" class="big-btn" value="Get your license" onclick="Generate()">
@@ -189,4 +194,5 @@
         </div>
     </div>
 </body>
+
 </html>

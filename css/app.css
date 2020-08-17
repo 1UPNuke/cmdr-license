@@ -1,0 +1,50 @@
+:root {
+    --ed-orange: #ff7100;
+    --ed-dark-orange: #884500;
+}
+
+body{
+    /* Remove background image so transparency works properly */
+    background-image: none !important;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+#title-bar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    -webkit-app-region: drag;
+    height: 24px;
+    width: 100%;
+    background-color: #000;
+    padding-top: 10px;
+    margin: 0px;
+}
+
+#title-bar-btns {
+    padding-top: 5px;
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: 0px;
+    right: 6px;
+}
+
+#container {
+    height: 100vh;
+    padding: 10px 10px;
+    overflow: scroll;
+}
+
+#container::-webkit-scrollbar {
+    width: 12px; /* width of the entire scrollbar */
+}
+#container::-webkit-scrollbar-track {
+    background: transparent; /* color of the tracking area */
+}
+#container::-webkit-scrollbar-thumb {
+    background-color: var(--ed-orange); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+}
