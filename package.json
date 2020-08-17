@@ -1,6 +1,6 @@
 {
   "name": "cmdr-license-v2",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Commander license generator for the game Elite: Dangerous",
   "main": "main.js",
   "scripts": {
