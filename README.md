@@ -1,7 +1,5 @@
 # CMDR License V2
-> A commander license generator for the game Elite: Dangerous
-
-One to two paragraph statement about your product and what it does.
+A commander license generator for the game Elite: Dangerous
 
 ![](header.png)
 
