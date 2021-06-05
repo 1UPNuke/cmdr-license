@@ -11,7 +11,7 @@ const colors = {
 var titles = [
     "Place of birth:",
     "Birthday:",
-    "Sex:",
+    "Gender:",
     "Primary Ship:",
     "Ship Name:",
     "Ship ID:",
@@ -23,7 +23,7 @@ const keys = [
     "name",
     "birthplace",
     "birthday",
-    "sex",
+    "gender",
     "ship",
     "shipname",
     "id",
