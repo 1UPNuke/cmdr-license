@@ -1,7 +1,12 @@
 "use strict";
 
 (() => {
-  let canvas, ctx, name, pic;
+  let canvas;
+  let ctx;
+  let name;
+  let pic;
+  let numberOfRanks = 6;
+
   const colors = {
     orange: "#ff7100",
     yellow: "#ffb000",
@@ -56,20 +61,33 @@
     let dd = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
     $("#birthday").val(`${yyyy}-${mm}-${dd}`);
 
-    birthdayToDOI();
+    switchBirthdayAndDOI();
+    switchOdysseyAndHorizons();
     generate();
 
+    $("body").on("click", "#birthdaydoi", switchBirthdayAndDOI);
+    $("body").on("click", "#horizon-switch", switchOdysseyAndHorizons);
     $("body").on("click", "#get-license", generate);
     $("body").on("click", "#save-png", save);
   });
 
-  function birthdayToDOI() {
+  function switchBirthdayAndDOI() {
     if (form["birthdaydoi"].checked) {
       form["birthday"].labels[0].textContent = "Date Of Issue: ";
       titles[1] = "Date Of Issue: ";
     } else {
       form["birthday"].labels[0].textContent = "Birthday: ";
       titles[1] = "Birthday: ";
+    }
+  }
+
+  function switchOdysseyAndHorizons() {
+    if (form["horizon-switch"].checked) {
+      numberOfRanks = 4;
+      $("label[for=exobiology], label[for=mercenary]").hide();
+    } else {
+      numberOfRanks = 6;
+      $("label[for=exobiology], label[for=mercenary]").show();
     }
   }
 
@@ -83,6 +101,26 @@
 
     ctx.fillStyle = colors.ui;
 
+    await drawLicenseHeader();
+    await drawAvatar();
+    await drawTableHeader();
+    await drawTable();
+    await drawRanks();
+    await drawTripleElite();
+
+    //Draw background
+    ctx.globalCompositeOperation = "destination-over";
+    drawImageFromSource("img/background.png", 22, 15);
+  }
+
+  function getRankImagePath(type, rankIndex) {
+    rankIndex = parseInt(rankIndex, 10);
+    rankIndex = Math.min(9, Math.max(1, rankIndex)); // Clamp between 1 and 9
+
+    return `img/rank/${type}/rank${rankIndex}.png`;
+  }
+
+  async function drawLicenseHeader() {
     //Draw pilot fed logo and color it
     await drawImageFromSource("img/pilotfedlogo.png", 75, 50);
     ctx.globalCompositeOperation = "source-atop";
@@ -94,7 +132,9 @@
     ctx.fillText("Pilots Federation", 290, 100);
     ctx.font = "100px eurocaps";
     ctx.fillText("Commander License", 285, 175);
+  }
 
+  async function drawAvatar() {
     //Draw the uploaded picture with rounded corners
     ctx.save();
     ctx.fillStyle = "transparent";
@@ -102,7 +142,9 @@
     ctx.clip();
     await drawImage(pic, 45, 275, 525, 525);
     ctx.restore();
+  }
 
+  async function drawTableHeader() {
     //Draw CMDR name and underline
     if (form["name"].value) {
       name = form["name"].value;
@@ -110,27 +152,30 @@
       name = form["name"].placeholder;
     }
     //Scale name based on width
+    const commanderName = `CMDR ${name}`;
     ctx.font =
-      Math.min((100 / ctx.measureText(`CMDR ${name}`).width) * 750, 100) +
+      Math.min((100 / ctx.measureText(commanderName).width) * 750, 100) +
       "px eurocaps";
-    ctx.fillText(`CMDR ${name}`, 600, 350);
+    ctx.fillText(commanderName, 600, 350);
     ctx.fillRect(590, 360, 1300, 5);
 
     //Draw faction icon based on name width and color it
     await drawImageFromSource(
       `img/factions/${form["faction"].value}.png`,
-      600 + ctx.measureText(`CMDR ${name}`).width + 50,
+      600 + ctx.measureText(commanderName).width + 50,
       275
     );
     ctx.globalCompositeOperation = "source-atop";
     ctx.fillRect(
-      600 + ctx.measureText(`CMDR ${name}`).width + 50,
+      600 + ctx.measureText(commanderName).width + 50,
       275,
       200,
       200
     );
     ctx.globalCompositeOperation = "source-over";
+  }
 
+  async function drawTable() {
     //Draw all titles
     ctx.font = "37px eurocaps";
     let i = 1;
@@ -153,7 +198,9 @@
       }
       i++;
     }
+  }
 
+  async function drawRanks() {
     ctx.font = "32px eurocaps";
     ctx.textAlign = "center";
 
@@ -161,7 +208,11 @@
     const rightRankMargin = 70;
     const rankPadding = 150;
     const rankBoxSize =
-      (canvas.width - leftRankMargin - rightRankMargin - 5 * rankPadding) / 6;
+      (canvas.width -
+        leftRankMargin -
+        rightRankMargin -
+        (numberOfRanks - 1) * rankPadding) /
+      numberOfRanks;
     const rankSize = 0.8 * rankBoxSize;
     const rankY = 980;
 
@@ -235,54 +286,68 @@
       1160
     );
 
-    //Mercenary rank
-    const mercenaryRank = form["mercenary"].value;
-    ctx.fillStyle = colors.yellow;
-    let mercenaryX = leftRankMargin + 3 * rankPadding + rankBoxSize * 3.5;
-    ctx.fillText("Mercenary", mercenaryX, 870);
-    await drawCenteredImage(
-      getRankImagePath("mercenary", mercenaryRank),
-      mercenaryX,
-      rankY,
-      rankSize,
-      rankSize
-    );
-    drawPrestigeStars("mercenary", mercenaryRank, mercenaryX, rankY, rankSize);
-    ctx.fillText(
-      form["mercenary"].children[mercenaryRank].label,
-      mercenaryX,
-      1160
-    );
+    if (!form["horizon-switch"].checked) {
+      //Mercenary rank
+      const mercenaryRank = form["mercenary"].value;
+      ctx.fillStyle = colors.yellow;
+      let mercenaryX = leftRankMargin + 3 * rankPadding + rankBoxSize * 3.5;
+      ctx.fillText("Mercenary", mercenaryX, 870);
+      await drawCenteredImage(
+        getRankImagePath("mercenary", mercenaryRank),
+        mercenaryX,
+        rankY,
+        rankSize,
+        rankSize
+      );
+      drawPrestigeStars(
+        "mercenary",
+        mercenaryRank,
+        mercenaryX,
+        rankY,
+        rankSize
+      );
+      ctx.fillText(
+        form["mercenary"].children[mercenaryRank].label,
+        mercenaryX,
+        1160
+      );
+    }
 
-    //Exobiology rank
-    let exobiologyRank = form["exobiology"].value;
-    ctx.fillStyle = colors.blue;
-    let exobiologyX = leftRankMargin + 4 * rankPadding + rankBoxSize * 4.5;
-    ctx.fillText("Exobiology", exobiologyX, 870);
-    await drawCenteredImage(
-      getRankImagePath("exobiology", exobiologyRank),
-      exobiologyX,
-      rankY,
-      rankSize,
-      rankSize
-    );
-    drawPrestigeStars(
-      "exobiology",
-      exobiologyRank,
-      exobiologyX,
-      rankY,
-      rankSize
-    );
-    ctx.fillText(
-      form["exobiology"].children[exobiologyRank].label,
-      exobiologyX,
-      1160
-    );
+    if (!form["horizon-switch"].checked) {
+      //Exobiology rank
+      let exobiologyRank = form["exobiology"].value;
+      ctx.fillStyle = colors.blue;
+      let exobiologyX = leftRankMargin + 4 * rankPadding + rankBoxSize * 4.5;
+      ctx.fillText("Exobiology", exobiologyX, 870);
+      await drawCenteredImage(
+        getRankImagePath("exobiology", exobiologyRank),
+        exobiologyX,
+        rankY,
+        rankSize,
+        rankSize
+      );
+      drawPrestigeStars(
+        "exobiology",
+        exobiologyRank,
+        exobiologyX,
+        rankY,
+        rankSize
+      );
+      ctx.fillText(
+        form["exobiology"].children[exobiologyRank].label,
+        exobiologyX,
+        1160
+      );
+    }
 
     //CQC rank
     let cqcRank = form["cqc"].value;
     ctx.fillStyle = colors.red;
-    let cqcX = leftRankMargin + 5 * rankPadding + rankBoxSize * 5.5;
+    const cqcPosition = form["horizon-switch"].checked ? 4 : 6;
+    let cqcX =
+      leftRankMargin +
+      (cqcPosition - 1) * rankPadding +
+      rankBoxSize * (cqcPosition - 0.5);
     ctx.fillText("CQC", cqcX, 870);
     await drawCenteredImage(
       "img/rank/cqc/BG.png",
@@ -300,7 +365,9 @@
     );
     drawPrestigeStars("cqc", cqcRank, cqcX, rankY, rankSize);
     ctx.fillText(form["cqc"].children[cqcRank].label, cqcX, 1160);
+  }
 
+  async function drawTripleElite() {
     //If triple elite, draw the overlay and color it
     if (
       form["combat"].value >= 9 &&
@@ -313,17 +380,6 @@
       ctx.fillRect(68, 60, 200, 200);
       ctx.globalCompositeOperation = "source-over";
     }
-
-    //Draw background
-    ctx.globalCompositeOperation = "destination-over";
-    drawImageFromSource("img/background.png", 22, 15);
-  }
-
-  function getRankImagePath(type, rankIndex) {
-    rankIndex = parseInt(rankIndex, 10);
-    rankIndex = Math.min(9, Math.max(1, rankIndex)); // Clamp between 1 and 9
-
-    return `img/rank/${type}/rank${rankIndex}.png`;
   }
 
   async function drawPrestigeStars(

@@ -72,7 +72,6 @@
             id="birthdaydoi"
             name="faction"
             value="independent"
-            onchange="BirthdayToDOI();"
           />
           <label for="birthdaydoi">Change birthday to date of issue</label
           ><br />
@@ -127,114 +126,130 @@
           <br />
           <label for="rank">Rank: </label><br />
           <div id="rank">
-            <label for="combat">Combat: </label>
-            <select id="combat">
-              <option value="0">N/A</option>
-              <option value="1" selected>Harmless</option>
-              <option value="2">Mostly Harmless</option>
-              <option value="3">Novice</option>
-              <option value="4">Competent</option>
-              <option value="5">Expert</option>
-              <option value="6">Master</option>
-              <option value="7">Dangerous</option>
-              <option value="8">Deadly</option>
-              <option value="9">Elite</option>
-              <option value="10">Elite I</option>
-              <option value="11">Elite II</option>
-              <option value="12">Elite III</option>
-              <option value="13">Elite IV</option>
-              <option value="14">Elite V</option></select
-            ><br />
-            <label for="trade">Trade: </label>
-            <select id="trade">
-              <option value="0">N/A</option>
-              <option value="1" selected>Penniless</option>
-              <option value="2">Mostly Penniless</option>
-              <option value="3">Peddler</option>
-              <option value="4">Dealer</option>
-              <option value="5">Merchant</option>
-              <option value="6">Broker</option>
-              <option value="7">Entrepreneur</option>
-              <option value="8">Tycoon</option>
-              <option value="9">Elite</option>
-              <option value="10">Elite I</option>
-              <option value="11">Elite II</option>
-              <option value="12">Elite III</option>
-              <option value="13">Elite IV</option>
-              <option value="14">Elite V</option></select
-            ><br />
-            <label for="explorer">Explorer: </label>
-            <select id="explorer">
-              <option value="0">N/A</option>
-              <option value="1" selected>Aimless</option>
-              <option value="2">Mostly Aimless</option>
-              <option value="3">Scout</option>
-              <option value="4">Surveyor</option>
-              <option value="5">Trailblazer</option>
-              <option value="6">Pathfinder</option>
-              <option value="7">Ranger</option>
-              <option value="8">Pioneer</option>
-              <option value="9">Elite</option>
-              <option value="10">Elite I</option>
-              <option value="11">Elite II</option>
-              <option value="12">Elite III</option>
-              <option value="13">Elite IV</option>
-              <option value="14">Elite V</option></select
-            ><br />
-            <label for="mercenary">Mercenary: </label>
-            <select id="mercenary">
-              <option value="0" selected>N/A</option>
-              <option value="1">Defenceless</option>
-              <option value="2">Mostly Defenceless</option>
-              <option value="3">Rookie</option>
-              <option value="4">Soldier</option>
-              <option value="5">Gunslinger</option>
-              <option value="6">Warrior</option>
-              <option value="7">Gladiator</option>
-              <option value="8">Deadeye</option>
-              <option value="9">Elite</option>
-              <option value="10">Elite I</option>
-              <option value="11">Elite II</option>
-              <option value="12">Elite III</option>
-              <option value="13">Elite IV</option>
-              <option value="14">Elite V</option></select
-            ><br />
-            <label for="exobiology">Exobiologist: </label>
-            <select id="exobiology">
-              <option value="0" selected>N/A</option>
-              <option value="1">Directionless</option>
-              <option value="2">Mostly Directionless</option>
-              <option value="3">Compiler</option>
-              <option value="4">Collector</option>
-              <option value="5">Cataloguer</option>
-              <option value="6">Taxonomist</option>
-              <option value="7">Ecologist</option>
-              <option value="8">Geneticist</option>
-              <option value="9">Elite</option>
-              <option value="10">Elite I</option>
-              <option value="11">Elite II</option>
-              <option value="12">Elite III</option>
-              <option value="13">Elite IV</option>
-              <option value="14">Elite V</option></select
-            ><br />
-            <label for="cqc">CQC: </label>
-            <select id="cqc">
-              <option value="0" selected>N/A</option>
-              <option value="1">Helpless</option>
-              <option value="2">Mostly Helpless</option>
-              <option value="3">Amateur</option>
-              <option value="4">Semi Professional</option>
-              <option value="5">Professional</option>
-              <option value="6">Champion</option>
-              <option value="7">Hero</option>
-              <option value="8">Legend</option>
-              <option value="9">Elite</option>
-              <option value="10">Elite I</option>
-              <option value="11">Elite II</option>
-              <option value="12">Elite III</option>
-              <option value="13">Elite IV</option>
-              <option value="14">Elite V</option></select
-            ><br />
+            <input type="checkbox" id="horizon-switch" />
+            <label for="horizon-switch">Show only Horizon ranks</label>
+            <br />
+
+            <label for="combat"
+              >Combat:
+              <select id="combat">
+                <option value="0">N/A</option>
+                <option value="1" selected>Harmless</option>
+                <option value="2">Mostly Harmless</option>
+                <option value="3">Novice</option>
+                <option value="4">Competent</option>
+                <option value="5">Expert</option>
+                <option value="6">Master</option>
+                <option value="7">Dangerous</option>
+                <option value="8">Deadly</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="trade"
+              >Trade:
+              <select id="trade">
+                <option value="0">N/A</option>
+                <option value="1" selected>Penniless</option>
+                <option value="2">Mostly Penniless</option>
+                <option value="3">Peddler</option>
+                <option value="4">Dealer</option>
+                <option value="5">Merchant</option>
+                <option value="6">Broker</option>
+                <option value="7">Entrepreneur</option>
+                <option value="8">Tycoon</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="explorer"
+              >Explorer:
+              <select id="explorer">
+                <option value="0">N/A</option>
+                <option value="1" selected>Aimless</option>
+                <option value="2">Mostly Aimless</option>
+                <option value="3">Scout</option>
+                <option value="4">Surveyor</option>
+                <option value="5">Trailblazer</option>
+                <option value="6">Pathfinder</option>
+                <option value="7">Ranger</option>
+                <option value="8">Pioneer</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="mercenary"
+              >Mercenary:
+              <select id="mercenary">
+                <option value="0">N/A</option>
+                <option value="1" selected>Defenceless</option>
+                <option value="2">Mostly Defenceless</option>
+                <option value="3">Rookie</option>
+                <option value="4">Soldier</option>
+                <option value="5">Gunslinger</option>
+                <option value="6">Warrior</option>
+                <option value="7">Gladiator</option>
+                <option value="8">Deadeye</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="exobiology"
+              >Exobiologist:
+              <select id="exobiology">
+                <option value="0">N/A</option>
+                <option value="1" selected>Directionless</option>
+                <option value="2">Mostly Directionless</option>
+                <option value="3">Compiler</option>
+                <option value="4">Collector</option>
+                <option value="5">Cataloguer</option>
+                <option value="6">Taxonomist</option>
+                <option value="7">Ecologist</option>
+                <option value="8">Geneticist</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="cqc"
+              >CQC:
+              <select id="cqc">
+                <option value="0" selected>N/A</option>
+                <option value="1">Helpless</option>
+                <option value="2">Mostly Helpless</option>
+                <option value="3">Amateur</option>
+                <option value="4">Semi Professional</option>
+                <option value="5">Professional</option>
+                <option value="6">Champion</option>
+                <option value="7">Hero</option>
+                <option value="8">Legend</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
           </div>
           <br />
           <label for="factionrank">Faction ranks: </label><br />
