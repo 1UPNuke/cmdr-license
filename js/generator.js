@@ -5,6 +5,7 @@
   let ctx;
   let name;
   let pic;
+  let form;
   let numberOfRanks = 6;
 
   const colors = {
@@ -14,7 +15,7 @@
     blue: "#00b1fa",
     red: "#f00",
   };
-  var titles = [
+  const titles = [
     "Place of birth:",
     "Birthday:",
     "Gender:",
@@ -37,9 +38,8 @@
     "fedrank",
     "empirerank",
   ];
-  var form;
 
-  if (typeof window.process == "object" && window.process.versions.electron) {
+  if (typeof window.process === "object" && window.process.versions.electron) {
     window.$ = window.jQuery = module.exports;
   }
 
@@ -48,7 +48,7 @@
     ctx = canvas.getContext("2d");
     form = document.forms["licenseform"];
 
-    var imageLoader = document.getElementById("picture");
+    const imageLoader = document.getElementById("picture");
     imageLoader.addEventListener("change", handleImage, false);
     pic = await loadImage("img/defpic.png");
 
@@ -407,6 +407,7 @@
           30,
           30
         );
+      // Intentionally no break
       case 2:
         drawCenteredImage(
           starPath,
@@ -439,6 +440,7 @@
           30,
           30
         );
+      // Intentionally no break
       case 3:
         drawCenteredImage(
           starPath,
@@ -454,6 +456,7 @@
           30,
           30
         );
+      // Intentionally no break
       case 1:
         drawCenteredImage(
           starPath,
@@ -500,7 +503,7 @@
   }
 
   async function drawImageFromSource(src, x, y, width = null, height = null) {
-    var img = await loadImage(src);
+    const img = await loadImage(src);
     drawImage(img, x, y, width, height);
     return;
   }
@@ -519,7 +522,7 @@
     maxWidth = null,
     maxHeight = null
   ) {
-    var img = await loadImage(src);
+    const img = await loadImage(src);
     if (maxWidth === null) {
       maxWidth = img.width;
     }
@@ -554,9 +557,9 @@
   }
 
   function handleImage(e) {
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = function (event) {
-      var img = new Image();
+      const img = new Image();
       img.onload = function () {
         pic = img;
       };
@@ -566,8 +569,8 @@
   }
 
   async function save() {
-    //await Generate();
-    var link = $("#link")[0];
+    // await generate();
+    const link = $("#link")[0];
     link.setAttribute("download", `CMDRLicense-${name}.png`);
     link.setAttribute(
       "href",
@@ -582,8 +585,8 @@
     } else if (typeof radius === "number") {
       radius = { tl: radius, tr: radius, br: radius, bl: radius };
     } else {
-      var defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
-      for (var side in defaultRadius) {
+      const defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
+      for (const side in defaultRadius) {
         radius[side] = radius[side] || defaultRadius[side];
       }
     }
