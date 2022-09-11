@@ -52,14 +52,8 @@
     imageLoader.addEventListener("change", handleImage, false);
     pic = await loadImage("img/defpic.png");
 
-    let date = new Date();
-    let yyyy = `${date.getFullYear() + 1286}`;
-    let mm =
-      date.getMonth() + 1 < 10
-        ? `0${date.getMonth() + 1}`
-        : `${date.getMonth() + 1}`;
-    let dd = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
-    $("#birthday").val(`${yyyy}-${mm}-${dd}`);
+    const currentDate = getCurrentDate();
+    $("#birthday").val(currentDate);
 
     switchBirthdayAndDOI();
     switchOdysseyAndHorizons();
@@ -107,6 +101,7 @@
     await drawTable();
     await drawRanks();
     await drawTripleElite();
+    await drawDocumentNumber();
 
     //Draw background
     ctx.globalCompositeOperation = "destination-over";
@@ -471,6 +466,39 @@
     }
   }
 
+  async function drawDocumentNumber() {
+    const documentNumber = getDocumentIdentifier(
+      form.name.value ? form.name.value : form.name.placeholder,
+      form.birthplace.value
+        ? form.birthplace.value
+        : form.birthplace.placeholder
+    );
+
+    const resetFont = ctx.font;
+    const resetFillStyle = ctx.fillStyle;
+
+    ctx.font = "40px eurocaps";
+    ctx.fillStyle = "rgba(100, 100, 100, .2)";
+    ctx.textAlign = "left";
+
+    let widthSoFar = 0;
+    for (let i = documentNumber.length - 1; i >= 0; i--) {
+      const segment = documentNumber[i];
+      const width = ctx.measureText(segment).width;
+      widthSoFar += width;
+      ctx.fillText(
+        segment,
+        canvas.width - widthSoFar - 150,
+        60 + 10 * (i % 2),
+        width
+      );
+    }
+
+    ctx.font = resetFont;
+    ctx.fillStyle = resetFillStyle;
+    ctx.textAlign = "center";
+  }
+
   async function drawImageFromSource(src, x, y, width = null, height = null) {
     var img = await loadImage(src);
     drawImage(img, x, y, width, height);
@@ -576,5 +604,32 @@
     ctx.quadraticCurveTo(x, y, x + radius.tl, y);
     ctx.closePath();
     ctx.fill();
+  }
+
+  function getCurrentDate() {
+    let date = new Date();
+    let yyyy = `${date.getFullYear() + 1286}`;
+    let mm =
+      date.getMonth() + 1 < 10
+        ? `0${date.getMonth() + 1}`
+        : `${date.getMonth() + 1}`;
+    let dd = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  function getDocumentIdentifier(name, place) {
+    const prefix = "PF";
+    const prime1 = 8056681;
+    const prime2 = 97;
+
+    const largeNumber =
+      name.split("").reduce((number, _, index) => {
+        return number * name.charCodeAt(index);
+      }, 1) * new Date(getCurrentDate()).getTime();
+    const documentNumber = `${largeNumber % prime1}`.padStart(7, "0");
+    const placeSuffix = place.slice(0, 4).padStart(4, "X").toUpperCase();
+    const notSoRandomNumberSuffix = `${largeNumber % prime2}`.padStart(2, "0");
+
+    return [prefix, documentNumber, placeSuffix, notSoRandomNumberSuffix];
   }
 })();
