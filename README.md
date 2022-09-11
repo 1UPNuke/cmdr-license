@@ -1,4 +1,5 @@
-# CMDR License V2
+# CMDR License V3
+
 A commander license generator for the game Elite: Dangerous
 
 ![](header.png)
@@ -18,10 +19,15 @@ npm run dist
 
 ## Release History
 
-* 2.0.0
-    * ADD: Bunch of features compared to V1
-* 2.1.0
-    * ADD: Standalone app using electron
+- 2.0.0
+  - ADD: Bunch of features compared to V1
+- 2.1.0
+  - ADD: Standalone app using electron
+- 3.0.0
+  - ADD: Odyssey ranks and prestige ranks
+  - ADD: Odyssey and Horizon mode
+  - ADD: Document number
+  - CHANGE: Combined N/A and minimum rank mode. CQC defaults to N/A.
 
 ## Meta
 
