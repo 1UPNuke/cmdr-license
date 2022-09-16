@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CMDR License Maker V2</title>
+    <title>CMDR License Maker V3</title>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/generator.js"></script>
@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <meta property="og:title" content="CMDR License Maker V2" />
+    <meta property="og:title" content="CMDR License Maker V3" />
     <meta
       property="og:image"
       content="https://oneup.life/media/images/ogimage.webp"
@@ -40,10 +40,10 @@
   </head>
 
   <body>
-    <a id="link" style="display: none;"></a>
+    <a id="link" style="display: none"></a>
     <h1>
       <img src="img/pilotfedlogo.png" width="50px" alt="" /> Pilots Federation
-      Commander License Application V2
+      Commander License Application V3
     </h1>
     <div id="content">
       <div id="licenseformdiv">
@@ -55,7 +55,7 @@
         </p>
         <form name="licenseform">
           <noscript>
-            <p style="color: red; font-size: 200%;">
+            <p style="color: red; font-size: 200%">
               Please enable javascript!
             </p> </noscript
           ><br />
@@ -72,9 +72,9 @@
             id="birthdaydoi"
             name="faction"
             value="independent"
-            onchange="BirthdayToDOI();"
           />
-          <label for="lowestna">Change birthday to date of issue</label><br />
+          <label for="birthdaydoi">Change birthday to date of issue</label
+          ><br />
           <label for="birthday">Birthday: </label>
           <input type="date" id="birthday" /><br />
           <br />
@@ -125,63 +125,131 @@
           </div>
           <br />
           <label for="rank">Rank: </label><br />
-          <input
-            type="checkbox"
-            id="lowestna"
-            name="faction"
-            value="independent"
-            onchange="LowestToNA();"
-          />
-          <label for="lowestna">Change lowest ranks to "N/A"</label><br />
           <div id="rank">
-            <label for="combat">Combat: </label>
-            <select id="combat">
-              <option value="0">Harmless</option>
-              <option value="1">Mostly Harmless</option>
-              <option value="2">Novice</option>
-              <option value="3">Competent</option>
-              <option value="4">Expert</option>
-              <option value="5">Master</option>
-              <option value="6">Dangerous</option>
-              <option value="7">Deadly</option>
-              <option value="8">Elite</option> </select
-            ><br />
-            <label for="trade">Trade: </label>
-            <select id="trade">
-              <option value="0">Penniless</option>
-              <option value="1">Mostly Penniless</option>
-              <option value="2">Peddler</option>
-              <option value="3">Dealer</option>
-              <option value="4">Merchant</option>
-              <option value="5">Broker</option>
-              <option value="6">Entrepreneur</option>
-              <option value="7">Tycoon</option>
-              <option value="8">Elite</option> </select
-            ><br />
-            <label for="explorer">Explorer: </label>
-            <select id="explorer">
-              <option value="0">Aimless</option>
-              <option value="1">Mostly Aimless</option>
-              <option value="2">Scout</option>
-              <option value="3">Surveyor</option>
-              <option value="4">Trailblazer</option>
-              <option value="5">Pathfinder</option>
-              <option value="6">Ranger</option>
-              <option value="7">Pioneer</option>
-              <option value="8">Elite</option> </select
-            ><br />
-            <label for="cqc">CQC: </label>
-            <select id="cqc">
-              <option value="0">Helpless</option>
-              <option value="1">Mostly Helpless</option>
-              <option value="2">Amateur</option>
-              <option value="3">Semi Professional</option>
-              <option value="4">Professional</option>
-              <option value="5">Champion</option>
-              <option value="6">Hero</option>
-              <option value="7">Legend</option>
-              <option value="8">Elite</option> </select
-            ><br />
+            <input type="checkbox" id="horizon-switch" />
+            <label for="horizon-switch">Show only Horizon ranks</label>
+            <br />
+
+            <label for="combat"
+              >Combat:
+              <select id="combat">
+                <option value="0">N/A</option>
+                <option value="1" selected>Harmless</option>
+                <option value="2">Mostly Harmless</option>
+                <option value="3">Novice</option>
+                <option value="4">Competent</option>
+                <option value="5">Expert</option>
+                <option value="6">Master</option>
+                <option value="7">Dangerous</option>
+                <option value="8">Deadly</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="trade"
+              >Trade:
+              <select id="trade">
+                <option value="0">N/A</option>
+                <option value="1" selected>Penniless</option>
+                <option value="2">Mostly Penniless</option>
+                <option value="3">Peddler</option>
+                <option value="4">Dealer</option>
+                <option value="5">Merchant</option>
+                <option value="6">Broker</option>
+                <option value="7">Entrepreneur</option>
+                <option value="8">Tycoon</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="explorer"
+              >Explorer:
+              <select id="explorer">
+                <option value="0">N/A</option>
+                <option value="1" selected>Aimless</option>
+                <option value="2">Mostly Aimless</option>
+                <option value="3">Scout</option>
+                <option value="4">Surveyor</option>
+                <option value="5">Trailblazer</option>
+                <option value="6">Pathfinder</option>
+                <option value="7">Ranger</option>
+                <option value="8">Pioneer</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="mercenary"
+              >Mercenary:
+              <select id="mercenary">
+                <option value="0">N/A</option>
+                <option value="1" selected>Defenceless</option>
+                <option value="2">Mostly Defenceless</option>
+                <option value="3">Rookie</option>
+                <option value="4">Soldier</option>
+                <option value="5">Gunslinger</option>
+                <option value="6">Warrior</option>
+                <option value="7">Gladiator</option>
+                <option value="8">Deadeye</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="exobiology"
+              >Exobiologist:
+              <select id="exobiology">
+                <option value="0">N/A</option>
+                <option value="1" selected>Directionless</option>
+                <option value="2">Mostly Directionless</option>
+                <option value="3">Compiler</option>
+                <option value="4">Collector</option>
+                <option value="5">Cataloguer</option>
+                <option value="6">Taxonomist</option>
+                <option value="7">Ecologist</option>
+                <option value="8">Geneticist</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
+            <label for="cqc"
+              >CQC:
+              <select id="cqc">
+                <option value="0" selected>N/A</option>
+                <option value="1">Helpless</option>
+                <option value="2">Mostly Helpless</option>
+                <option value="3">Amateur</option>
+                <option value="4">Semi Professional</option>
+                <option value="5">Professional</option>
+                <option value="6">Champion</option>
+                <option value="7">Hero</option>
+                <option value="8">Legend</option>
+                <option value="9">Elite</option>
+                <option value="10">Elite I</option>
+                <option value="11">Elite II</option>
+                <option value="12">Elite III</option>
+                <option value="13">Elite IV</option>
+                <option value="14">Elite V</option></select
+              ><br />
+            </label>
           </div>
           <br />
           <label for="factionrank">Faction ranks: </label><br />
@@ -202,7 +270,7 @@
               <option value="Post Captain">Post Captain</option>
               <option value="Rear Admiral">Rear Admiral</option>
               <option value="Vice Admiral">Vice Admiral</option>
-              <option value="Admiral">Admiral</option> </select
+              <option value="Admiral">Admiral</option></select
             ><br />
             <label for="empirerank">Imperial Navy Rank: </label>
             <select id="empirerank">
@@ -220,7 +288,7 @@
               <option value="Marquis">Marquis</option>
               <option value="Duke">Duke</option>
               <option value="Prince">Prince</option>
-              <option value="King">King</option> </select
+              <option value="King">King</option></select
             ><br />
           </div>
           <br />
@@ -231,16 +299,16 @@
           <input type="color" id="color" value="#ff7100" /><br />
           <br />
           <input
+            id="get-license"
             type="button"
             class="big-btn"
             value="Get your license"
-            onclick="Generate()"
           />
           <input
+            id="save-png"
             type="button"
             class="big-btn"
             value="Save as .PNG"
-            onclick="Save()"
           />
         </form>
       </div>
