@@ -8,7 +8,7 @@
     src: url(../fonts/eurocaps.ttf);
 }
 body {
-    padding: 0px;
+    padding: 1vw;
     margin: 0px;
     background-color: #000e;
     background-image: url(../img/siteBG.png);
